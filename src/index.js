@@ -3,6 +3,7 @@
 
 // An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
+import dataController from './dataController.js'
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
@@ -10,4 +11,12 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-console.log('This is the JavaScript entry file - your code begins here.');
+let randomId = Math.floor(Math.random() * 50)
+
+console.log(randomId)
+
+// traveler50
+
+let userId = $('.user-input').val().substring(8, 9)
+window.on('keypress', console.log(userId))
+$('.submit-button').on('click', dataController.loadSingleUser(userId))
