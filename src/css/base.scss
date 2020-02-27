@@ -1,6 +1,57 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
+
+
+
 $primary-background: pink;
 
+
 body {
-  background-color: $primary-background;
+  // background-image: url('https://storage.needpix.com/thumbs/flowering-255_1280.jpg');
+  background: linear-gradient(167deg, rgba(8,136,200,1) 0%, rgba(255,255,255,1) 100%);
+  font-family: 'Cabin';
+  height: 100vh;
+  margin: 0px;
 }
+
+header {
+  background: -moz-linear-gradient(48deg, rgba(8,18,68,0.6573004201680672) 0%, rgba(255,255,255,0) 100%);
+  background: -webkit-linear-gradient(48deg, rgba(8,18,68,0.6573004201680672) 0%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(48deg, rgba(8,18,68,0.6573004201680672) 0%, rgba(255,255,255,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#081244",endColorstr="#ffffff",GradientType=1);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0 ,0.7);
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  
+  h1 {
+    letter-spacing: 8px;
+    font-size: 3em;
+  }
+  h3 {
+    padding-top: 70px;
+  }
+}
+
+.login-form {
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 10%;
+  // width: 20%;
+  // height: 20%;
+  label, h3 {
+    margin: 15px auto;
+  }
+  input {
+    font-size: 1.5em;
+    padding: 5px;
+  }
+  .submit-btn {
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
+    width: 11em;
+  }
+}
+
+
