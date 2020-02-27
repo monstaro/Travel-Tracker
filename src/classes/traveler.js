@@ -1,14 +1,12 @@
 class Traveler {
-  constructor(id, name, travelInterests) {
-    this.id = id,
-    this.name = name,
-    this.travelInterests = travelInterests
+  constructor(info) {
+    this.id = info.id,
+    this.name = info.name,
+    this.travelerType = info.travelerType
+    this.trips = null
   }
-  viewTrips() {
-
-  }
-  viewAmountSpentOnTrips() {
-    
+  seeAllTrips(tripData) {
+    return tripData.trips.filter(trip => trip.userID === this.id)
   }
   makeTripRequest() {
 
@@ -16,4 +14,4 @@ class Traveler {
 }
 
 
-export default 'traveler'
+export default Traveler
