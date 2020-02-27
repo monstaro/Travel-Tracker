@@ -1,3 +1,5 @@
+import Utility from '../src/classes/util.js';
+let util = new Utility()
 const tripData = {
   'trips': [
     {
@@ -17,7 +19,7 @@ const tripData = {
       "userID": 35,
       "destinationID": 25,
       "travelers": 5,
-      "date": "2020/10/04",
+      "date": util.getTodaysDate(),
       "duration": 18,
       "status": "pending",
       "suggestedActivities": [
