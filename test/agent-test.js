@@ -30,24 +30,24 @@ describe('Agent', function() {
     expect(agent).to.be.an.instanceof(Agent)
   })
   it('should see all pending requests', () => {
-    agent.findPendingRequests(tripData)
-    expect(agent.pendingRequests.length).to.equal(2)
+
+    expect(agent.findPendingRequests(tripData).length).to.equal(2)
   })
   it('should see all approved requests', () => {
-    agent.findApprovedRequests(tripData)
-    expect(agent.approvedRequests.length).to.equal(13)
+    
+    expect(agent.findApprovedRequests(tripData).length).to.equal(13)
   })
-  it('should have a total income', () => {
-    agent.findApprovedRequests(tripData)
-    agent.getTotalIncome(destination)
-    expect(agent.income).to.equal(5819)
+  it('should have a total income in the last year', () => {
+    // agent.findApprovedRequests(tripData)
+    expect(agent.getTotalIncomeInLastYear(tripData, destination)).to.equal(1279.9)
   })
   it('should be able to determine the number of travelers on todays date', () => {
-    expect(agent.findTravelerCountToday(tripData)).to.equal(1)
+    console.log
+    expect(agent.findTravelerCountToday(tripData).length).to.equal(1)
   })
   it('should be able to search through users by name and view their name, trips, and amt spent.', () => {
     let users = new userRepo(travelerData)
 
-    expect(agent.viewUserData('ham lEADbeATer', users.users)).to.deep.equal({})
+    expect(agent.viewUserData('ham lEADbeATer', tripData)).to.deep.equal({})
   })
 });

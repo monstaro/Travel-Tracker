@@ -1,5 +1,7 @@
 import Utility from './util.js';
-import userRepo from './allUsers.js'
+// import AllTrips from './allTrips.js'
+import UserRepo from './allUsers.js'
+import travelers from '../../data/sample-travelers.js'
 
 
 class Agent {
@@ -7,39 +9,41 @@ class Agent {
     this.pendingRequests = null;
     this.approvedRequests = null;
     this.income = null;
-    this.util = new Utility
+    this.util = new Utility;
+    this.users = new UserRepo(travelers)
   }
 
   findPendingRequests(tripData) {
-    this.pendingRequests = 
-    tripData.trips.filter(trip => trip.status === 'pending')
+    return tripData.trips.filter(trip => trip.status === 'pending')
   }
 
   findApprovedRequests(tripData) {
-    this.approvedRequests = 
-    tripData.trips.filter(trip => trip.status === 'approved')
+    return tripData.trips.filter(trip => trip.status === 'approved')
   }
 
-  getTotalIncome(destinationData) {
-    let preFee = this.approvedRequests.reduce((totalIncome, curTrip) => {
+  getTotalIncomeInLastYear(tripData, destinationData) {
+    let preFee = this.findApprovedRequests(tripData).reduce((totalSpent, curTrip) => {
       destinationData.forEach(destination => {
-        if (curTrip.destinationID === destination.id) {
-          totalIncome += (destination.estimatedLodgingCostPerDay * curTrip.duration)
+        if (curTrip.destinationID === destination.id && this.util.getDatesInLastYear().includes(curTrip.date)) {
+          totalSpent += (((destination.estimatedLodgingCostPerDay * curTrip.duration) + (destination.estimatedFlightCostPerPerson)) * curTrip.travelers)
         }
       })
-      return totalIncome
+      return totalSpent
     }, 0)
     let fee = preFee * .10
-    this.income = preFee + fee
+    return fee
   }
 
   findTravelerCountToday(tripData) {
     return tripData.trips.filter(trip => trip.date === this.util.getTodaysDate()
-    ).length
+    )
   }
 
   viewUserData(name) {
+    this.users.findUser(name)
+//unfinished
     return 
+    //find name, trips taken, amount spent
   }
 }
 
