@@ -16,14 +16,13 @@ class Traveler {
     return this.seeAllTrips(tripData).filter(trip => trip.status === 'approved')
   }
   findAmountSpent(tripData, destinationData) {
-    let preFee = this.seeApprovedTrips(tripData).reduce((totalIncome, curTrip) => {
+    let preFee = this.seeApprovedTrips(tripData).reduce((totalSpent, curTrip) => {
       destinationData.forEach(destination => {
         if (curTrip.destinationID === destination.id) {
-          console.log(destination.estimatedLodgingCostPerDay * curTrip.duration)
-          totalIncome += (destination.estimatedLodgingCostPerDay * curTrip.duration)
+          totalSpent += (((destination.estimatedLodgingCostPerDay * curTrip.duration) + (destination.estimatedFlightCostPerPerson)) * curTrip.travelers)
         }
       })
-      return totalIncome
+      return totalSpent
     }, 0)
     let fee = preFee * .10
     return preFee + fee
