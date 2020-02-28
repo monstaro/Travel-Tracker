@@ -1,5 +1,5 @@
 import Utility from './util.js';
-import AllTrips from './allTrips.js'
+// import AllTrips from './allTrips.js'
 import UserRepo from './allUsers.js'
 import travelers from '../../data/sample-travelers.js'
 
@@ -21,27 +21,27 @@ class Agent {
     return tripData.trips.filter(trip => trip.status === 'approved')
   }
 
-  getTotalIncome(tripData, destinationData) {
-    let preFee = this.findApprovedRequests(tripData).reduce((totalIncome, curTrip) => {
+  getTotalIncomeInLastYear(tripData, destinationData) {
+    let preFee = this.findApprovedRequests(tripData).reduce((totalSpent, curTrip) => {
       destinationData.forEach(destination => {
-        if (curTrip.destinationID === destination.id) {
-          totalIncome += (destination.estimatedLodgingCostPerDay * curTrip.duration)
+        if (curTrip.destinationID === destination.id && this.util.getDatesInLastYear().includes(curTrip.date)) {
+          totalSpent += (((destination.estimatedLodgingCostPerDay * curTrip.duration) + (destination.estimatedFlightCostPerPerson)) * curTrip.travelers)
         }
       })
-      return totalIncome
+      return totalSpent
     }, 0)
     let fee = preFee * .10
-    return preFee + fee
+    return fee
   }
 
   findTravelerCountToday(tripData) {
     return tripData.trips.filter(trip => trip.date === this.util.getTodaysDate()
-    ).length
+    )
   }
 
   viewUserData(name) {
     this.users.findUser(name)
-
+//unfinished
     return 
     //find name, trips taken, amount spent
   }
