@@ -45,13 +45,30 @@ const loginHandler = () => {
 
 }
 
+const clickHandler = (e) => {
+  console.log(e)
+  if (e.target.value === "1") {
+    domUpdates.displayTrips('seeAllTrips')
+  }
+  if (e.target.value === "2") {
+    domUpdates.displayTrips('seeFutureTrips')
+  }
+  if (e.target.value === "3") {
+    domUpdates.displayTrips('seePastTrips')
+  }
+  if (e.target.value === "4") {
+    domUpdates.displayTrips('seePendingTrips')
+  }
+}
 
-
+$('select').on('change', clickHandler)
 
 const loginTraveler = () => {
   let id = userName.val().substring(8, 10)
   dataController.loadUser(id)
 }
+
+
 
 
 const loginAgent = () => {
