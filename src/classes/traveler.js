@@ -25,8 +25,8 @@ class Traveler extends Utility {
   seeFutureTrips() {
     return this.trips.filter(trip => trip.date > this.getTodaysDate())
   }
-  findAmountSpent(tripData, destinationData) {
-    let preFee = this.seeApprovedTrips(tripData).reduce((totalSpent, curTrip) => {
+  findAmountSpent(destinationData) {
+    let preFee = this.seeApprovedTrips().reduce((totalSpent, curTrip) => {
       destinationData.forEach(destination => {
         if (curTrip.destinationID === destination.id) {
           totalSpent += (((destination.estimatedLodgingCostPerDay * curTrip.duration) + (destination.estimatedFlightCostPerPerson)) * curTrip.travelers)
@@ -35,7 +35,9 @@ class Traveler extends Utility {
       return totalSpent
     }, 0)
     let fee = preFee * .10
-    return preFee + fee
+    let fullAmt = preFee + fee;
+    
+    return this.turnNumberIntoDollarAmount(fullAmt)
     //this function also lives on the agent class, I would like to refactor
   }
 }
