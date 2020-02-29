@@ -1,19 +1,29 @@
 import Utility from './util.js';
 
 
-class Traveler {
-  constructor(info) {
+class Traveler extends Utility {
+  constructor(info, trips) {
+    super()
     this.id = info.id,
     this.name = info.name,
     this.travelerType = info.travelerType,
-    this.trips = null,
-    this.utility = new Utility
+    this.trips = trips
   }
-  seeAllTrips(tripData) {
-    return tripData.trips.filter(trip => trip.userID === this.id)
+  seeAllTrips() {
+    
   }
-  seeApprovedTrips(tripData) {
-    return this.seeAllTrips(tripData).filter(trip => trip.status === 'approved')
+  seeApprovedTrips() {
+    return this.trips.filter(trip => trip.status === 'approved')
+  }
+  seePastTrips() {
+
+    return this.trips.filter(trip => trip.date < this.getTodaysDate())
+  }
+  // seePresentTrips() {
+  //   return this.utility.getDatesInRange(this.trips)
+  // }
+  seeFutureTrips() {
+    return this.trips.filter(trip => trip.date > this.getTodaysDate())
   }
   findAmountSpent(tripData, destinationData) {
     let preFee = this.seeApprovedTrips(tripData).reduce((totalSpent, curTrip) => {
