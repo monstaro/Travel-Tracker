@@ -6,7 +6,7 @@ $primary-background: pink;
 
 
 body {
-  // background-image: url('https://storage.needpix.com/thumbs/flowering-255_1280.jpg');
+  background-image: url('https://storage.needpix.com/thumbs/flowering-255_1280.jpg');
   background: linear-gradient(167deg, rgba(8,136,200,1) 0%, rgba(255,255,255,1) 100%);
   font-family: 'Cabin';
   height: 100vh;
@@ -53,5 +53,21 @@ header {
     width: 11em;
   }
 }
+
+
+.traveler-screen {
+  display: none;
+}
+
+.client-dashboard {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px grey;
+  padding: 20px;
+  margin: 100px auto 50px auto;
+}
+
+
 
 
