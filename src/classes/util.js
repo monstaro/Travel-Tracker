@@ -16,6 +16,18 @@ class Utility {
     }
     return datesInLastYear
   }
+  getDatesInRange(trips) {
+    let datesInRange = []
+//input: 2020/2/27, 6 days
+// output [2020/02/27...2020/03/05]
+    
+    datesInRange.push(moment().subtract())
+    
+  }
+
+  getFutureDates() {
+
+  }
 
 }
 

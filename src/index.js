@@ -19,7 +19,16 @@ import './images/turing-logo.png'
 let userName = $('.username-input')
 let password = $('.password-input')
 let agent;
-let traveler;
+let travelers;
+let trips;
+let destinations;
+
+
+
+
+
+
+
 
 
 $('.submit-btn').on('click', function() {
@@ -29,7 +38,7 @@ $('.submit-btn').on('click', function() {
 
 const loginHandler = () => {
   let allUsernames = []
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i <= 50; i++) {
     allUsernames.push(`traveler${i}`)
   }
   if (allUsernames.includes(userName.val().toLowerCase()) && password.val() === 'travel2020') {
@@ -43,13 +52,12 @@ const loginHandler = () => {
 }
 
 const loginTraveler = () => {
-  console.log('hey')
   let id = userName.val().substring(8, 10)
-  domUpdates.loadTraveler()
-  dataController.loadSingleUser(id)
-  // let traveler = new Traveler(user.id, user.name, user.travelType)
-  // console.log(traveler)
+  dataController.loadUser(id)
 }
+
+
+
 
 const loginAgent = () => {
   // agent = new Agent()
