@@ -25,12 +25,6 @@ let destinations;
 
 
 
-
-
-
-
-
-
 $('.submit-btn').on('click', function() {
   event.preventDefault()
   loginHandler()
@@ -51,18 +45,22 @@ const loginHandler = () => {
 
 }
 
+
+
+
 const loginTraveler = () => {
   let id = userName.val().substring(8, 10)
   dataController.loadUser(id)
 }
 
 
-
-
 const loginAgent = () => {
-  // agent = new Agent()
   domUpdates.loadAgent()
 }
+
+
+
+
 
 // const instantiateTrips = (tripData) => {
 //     let trip = new Trip(tripData)
