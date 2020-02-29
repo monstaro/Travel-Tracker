@@ -3,7 +3,7 @@
 
 // An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
-import dataController from './dataController.js'
+// import dataController from './dataController.js'
 import domUpdates from './domUpdates.js'
 import allTrips from './classes/allTrips.js'
 import Traveler from './classes/traveler.js'
@@ -19,7 +19,16 @@ import './images/turing-logo.png'
 let userName = $('.username-input')
 let password = $('.password-input')
 let agent;
-let traveler;
+let travelers;
+let trips;
+let destinations;
+
+
+
+
+
+
+
 
 
 $('.submit-btn').on('click', function() {
@@ -45,8 +54,10 @@ const loginHandler = () => {
 const loginTraveler = () => {
   console.log('hey')
   let id = userName.val().substring(8, 10)
-  domUpdates.loadTraveler()
-  dataController.loadSingleUser(id)
+  loadUser(id)
+  // console.log(id)
+  // dataController.loadSingleUser(id)
+  // domUpdates.loadTraveler()
   // let traveler = new Traveler(user.id, user.name, user.travelType)
   // console.log(traveler)
 }
