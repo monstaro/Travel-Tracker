@@ -9,19 +9,15 @@ class Traveler extends Utility {
     this.travelerType = info.travelerType,
     this.trips = trips
   }
-  seeAllTrips() {
-    
-  }
   seeApprovedTrips() {
     return this.trips.filter(trip => trip.status === 'approved')
   }
+  seeAllTrips() {
+    return this.trips;
+  }
   seePastTrips() {
-
     return this.trips.filter(trip => trip.date < this.getTodaysDate())
   }
-  // seePresentTrips() {
-  //   return this.utility.getDatesInRange(this.trips)
-  // }
   seeFutureTrips() {
     return this.trips.filter(trip => trip.date > this.getTodaysDate())
   }
@@ -36,9 +32,7 @@ class Traveler extends Utility {
     }, 0)
     let fee = preFee * .10
     let fullAmt = preFee + fee;
-    
     return this.turnNumberIntoDollarAmount(fullAmt)
-    //this function also lives on the agent class, I would like to refactor
   }
 }
 
