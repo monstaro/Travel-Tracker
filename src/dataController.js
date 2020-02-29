@@ -35,12 +35,17 @@ Promise.all([userData, tripsData, destinationsData])
 const dataController = {
   loadUser(id) {
     let user = allUsers[id - 1]
+    
     let trips = allTrips.filter(trip => trip.userID === parseInt(id))
+
+    trips.map(trip => trip.location = allDestinations.filter(destination => destination.id === trip.destinationID))
+
 
     traveler = new Traveler(user, trips)
 
-    console.log(traveler)
     domUpdates.loadTraveler(traveler, allDestinations)
+
+    console.log(traveler)
   }
 }
 
