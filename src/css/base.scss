@@ -1,6 +1,7 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 
 
+@import '~js-datepicker/src/datepicker';
 
 $primary-background: pink;
 $gradient-blue: linear-gradient(167deg, rgba(8,136,200,1) 0%, rgba(255,255,255,0.7) 100%);
@@ -89,6 +90,10 @@ header {
       font-size: 1em;
       height: 3em;
   }
+}
+
+.book-trip {
+  padding-top: 25px;
 }
 
 @media only screen and (max-width: 700px) {
