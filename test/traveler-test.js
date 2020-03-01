@@ -46,7 +46,7 @@ describe('Traveler', function() {
     
   })
   it('should find the amount spent on trips', () => {
-    expect(traveler.findAmountSpent(tripData, destinationData.destinations)).to.equal(7302.9)
+    expect(traveler.findAmountSpent(destinationData.destinations)).to.equal('$7,302.90')
   })
   it('should find past trips', () => {
     expect(traveler.seePastTrips()).to.deep.equal([

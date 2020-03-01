@@ -1,30 +1,25 @@
 import Utility from './util.js';
-// import AllTrips from './allTrips.js'
-import UserRepo from './allUsers.js'
-import travelers from '../../data/sample-travelers.js'
 
 
-class Agent {
-  constructor() {
-    this.pendingRequests = null;
-    this.approvedRequests = null;
-    this.income = null;
-    this.util = new Utility;
-    this.users = new UserRepo(travelers)
+class Agent extends Utility {
+  constructor(trips, users) {
+    super()
+    this.trips = trips;
+    this.users = users;
   }
 
-  findPendingRequests(tripData) {
-    return tripData.trips.filter(trip => trip.status === 'pending')
+  findPendingRequests() {
+    return this.trips.filter(trip => trip.status === 'pending')
   }
 
-  findApprovedRequests(tripData) {
-    return tripData.trips.filter(trip => trip.status === 'approved')
+  findApprovedRequests() {
+    return this.trips.filter(trip => trip.status === 'approved')
   }
 
-  getTotalIncomeInLastYear(tripData, destinationData) {
-    let preFee = this.findApprovedRequests(tripData).reduce((totalSpent, curTrip) => {
+  getTotalIncomeInLastYear(destinationData) {
+    let preFee = this.findApprovedRequests(this.trips).reduce((totalSpent, curTrip) => {
       destinationData.forEach(destination => {
-        if (curTrip.destinationID === destination.id && this.util.getDatesInLastYear().includes(curTrip.date)) {
+        if (curTrip.destinationID === destination.id && this.getDatesInLastYear().includes(curTrip.date)) {
           totalSpent += (((destination.estimatedLodgingCostPerDay * curTrip.duration) + (destination.estimatedFlightCostPerPerson)) * curTrip.travelers)
         }
       })
@@ -34,8 +29,8 @@ class Agent {
     return fee
   }
 
-  findTravelerCountToday(tripData) {
-    return tripData.trips.filter(trip => trip.date === this.util.getTodaysDate()
+  findTravelerCountToday() {
+    return this.trips.filter(trip => trip.date === this.getTodaysDate()
     )
   }
 

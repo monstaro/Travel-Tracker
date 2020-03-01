@@ -9,24 +9,23 @@ class Traveler extends Utility {
     this.travelerType = info.travelerType,
     this.trips = trips
   }
-  seeAllTrips() {
-    
-  }
   seeApprovedTrips() {
     return this.trips.filter(trip => trip.status === 'approved')
   }
+  seePendingTrips() {
+    return this.trips.filter(trip => trip.status === 'pending')
+  }
+  seeAllTrips() {
+    return this.trips;
+  }
   seePastTrips() {
-
     return this.trips.filter(trip => trip.date < this.getTodaysDate())
   }
-  // seePresentTrips() {
-  //   return this.utility.getDatesInRange(this.trips)
-  // }
   seeFutureTrips() {
     return this.trips.filter(trip => trip.date > this.getTodaysDate())
   }
-  findAmountSpent(tripData, destinationData) {
-    let preFee = this.seeApprovedTrips(tripData).reduce((totalSpent, curTrip) => {
+  findAmountSpent(destinationData) {
+    let preFee = this.seeApprovedTrips().reduce((totalSpent, curTrip) => {
       destinationData.forEach(destination => {
         if (curTrip.destinationID === destination.id) {
           totalSpent += (((destination.estimatedLodgingCostPerDay * curTrip.duration) + (destination.estimatedFlightCostPerPerson)) * curTrip.travelers)
@@ -35,8 +34,8 @@ class Traveler extends Utility {
       return totalSpent
     }, 0)
     let fee = preFee * .10
-    return preFee + fee
-    //this function also lives on the agent class, I would like to refactor
+    let fullAmt = preFee + fee;
+    return this.turnNumberIntoDollarAmount(fullAmt)
   }
 }
 

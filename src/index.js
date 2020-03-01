@@ -18,17 +18,6 @@ import './images/turing-logo.png'
 
 let userName = $('.username-input')
 let password = $('.password-input')
-let agent;
-let travelers;
-let trips;
-let destinations;
-
-
-
-
-
-
-
 
 
 $('.submit-btn').on('click', function() {
@@ -48,8 +37,26 @@ const loginHandler = () => {
   if (userName.val().toLowerCase() === 'agency' && password.val() === 'travel2020') {
     loginAgent()
   } 
-
 }
+
+const travelerClickHandler = (e) => {
+  if (e.target.value === "0") {
+    domUpdates.displayTrips(null)
+  }
+  if (e.target.value === "1") {
+    domUpdates.displayTrips('seeAllTrips')
+  }
+  if (e.target.value === "2") {
+    domUpdates.displayTrips('seeFutureTrips')
+  }
+  if (e.target.value === "3") {
+    domUpdates.displayTrips('seePastTrips')
+  }
+  if (e.target.value === "4") {
+    domUpdates.displayTrips('seePendingTrips')
+  }
+}
+
 
 const loginTraveler = () => {
   let id = userName.val().substring(8, 10)
@@ -57,12 +64,14 @@ const loginTraveler = () => {
 }
 
 
-
-
 const loginAgent = () => {
-  // agent = new Agent()
-  domUpdates.loadAgent()
+  dataController.loadAgent()
 }
+
+
+
+$('select').on('change', travelerClickHandler)
+
 
 // const instantiateTrips = (tripData) => {
 //     let trip = new Trip(tripData)
