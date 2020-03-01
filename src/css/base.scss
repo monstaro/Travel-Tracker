@@ -3,11 +3,13 @@
 
 
 $primary-background: pink;
-$gradient-blue: linear-gradient(167deg, rgba(8,136,200,1) 0%, rgba(255,255,255,1) 100%);
+$gradient-blue: linear-gradient(167deg, rgba(8,136,200,1) 0%, rgba(255,255,255,0.7) 100%);
 
 $header-gradient: linear-gradient(48deg, rgba(8,18,68,0.6573004201680672) 0%, rgba(255,255,255,0) 100%);
 
 body {
+  background: -moz-$gradient-blue;
+  background: -webkit-$gradient-blue;
   background: $gradient-blue;
   font-family: 'Cabin';
   background-size: cover;
@@ -31,6 +33,10 @@ header {
   }
   h3 {
     padding-top: 70px;
+  }
+  .logo {
+    margin-right: 20px;
+    width: 8%
   }
 }
 
@@ -72,8 +78,37 @@ header {
   font-size: 1.5em;
 }
 
-@media only screen and (max-width: 650px) {
+.trip-selector {
+  display: flex;
+  justify-content: space-evenly;
+  button {
+      background: rgba(8,136,200,1);
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      font-size: 1em;
+      height: 3em;
+  }
+}
+
+@media only screen and (max-width: 700px) {
   .client-dashboard, .agent-dashboard {
     width: 80vw;
+  }
+  .trip-selector {
+    display: block;
+  }
+  header {
+    display: block;
+    padding: 20px;
+    h1 {
+      display: inline;
+    }
+    h3 {
+      padding: 0 0 0 70px;
+    }
+    .logo {
+      width: 25%;
+    }
   }
 }
