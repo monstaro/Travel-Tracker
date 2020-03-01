@@ -47,6 +47,12 @@ const travelerClickHandler = (e) => {
   if (e.target.value === "4") {
     domUpdates.displayTrips('seePendingTrips')
   }
+  if (e.target.value === "5") {
+    domUpdates.beginBookNewTrip()
+  }
+  if (e.target.value === "6") {
+    domUpdates.selectLocation()
+  }
 }
 
 //EVENT LISTENERS
@@ -55,4 +61,4 @@ $('.submit-btn').on('click', function() {
   loginHandler()
 })
 
-$('.trip-selector').on('click', travelerClickHandler)
+$('.traveler-screen').on('click', travelerClickHandler)
