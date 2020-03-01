@@ -1,19 +1,11 @@
 const expect = chai.expect;
-
 import chai from 'chai';
-
 import Traveler from '../src/classes/traveler.js';
-
 import userRepo from '../src/classes/allUsers.js';
 import Agent from '../src/classes/agent.js';
-
 import travelerData from '../data/sample-travelers.js';
-
 import tripData from '../data/sample-trips.js';
-
 import destinationData from '../data/sample-destinations.js';
-
-
 
 let agent;
 let destination;
@@ -45,7 +37,6 @@ describe('Agent', function() {
   })
   it.skip('should be able to search through users by name and view their name, trips, and amt spent.', () => {
     let users = new userRepo(travelerData)
-
     expect(agent.viewUserData('ham lEADbeATer', tripData)).to.deep.equal({})
   })
 });

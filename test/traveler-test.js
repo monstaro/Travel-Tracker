@@ -1,15 +1,9 @@
 const expect = chai.expect;
-
 import chai from 'chai';
-
 import Traveler from '../src/classes/traveler.js';
-
 import travelerData from '../data/sample-travelers.js';
-
 import tripData from '../data/sample-trips.js';
-
 import destinationData from '../data/sample-destinations.js';
-
 
 let traveler
 
@@ -32,21 +26,14 @@ describe('Traveler', function() {
   it('should have a type of travel', () => {
     expect(traveler.travelerType).to.equal('photographer')
   })
-  it('should have trips', () => {
-
-  })
   it('should see all of the users trips', () => {
-    // traveler.seeAllTrips(tripData)
     expect(traveler.trips.length).to.equal(2)
   })
   it('should see all approved trips', () => {
     expect(traveler.seeApprovedTrips().length).to.equal(2)
   })
-  it('should be able to make a trip request', () => {
-    
-  })
-  it('should find the amount spent on trips', () => {
-    expect(traveler.findAmountSpent(destinationData.destinations)).to.equal('$7,302.90')
+  it('should see all pending trips', () => {
+    expect(traveler.seePendingTrips().length).to.equal(0)
   })
   it('should find past trips', () => {
     expect(traveler.seePastTrips()).to.deep.equal([
@@ -76,5 +63,8 @@ describe('Traveler', function() {
       
       ]
     }])
+  })
+  it('should find the amount spent on trips', () => {
+    expect(traveler.findAmountSpent(destinationData.destinations)).to.equal('$7,302.90')
   })
 });
