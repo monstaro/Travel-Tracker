@@ -47,6 +47,9 @@ const loginHandler = () => {
 
 const clickHandler = (e) => {
   console.log(e)
+  if(e.target.value === "0") {
+    domUpdates.displayTrips(null)
+  }
   if (e.target.value === "1") {
     domUpdates.displayTrips('seeAllTrips')
   }
