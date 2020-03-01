@@ -3,11 +3,12 @@
 
 
 $primary-background: pink;
+$gradient-blue: linear-gradient(167deg, rgba(8,136,200,1) 0%, rgba(255,255,255,1) 100%);
 
+$header-gradient: linear-gradient(48deg, rgba(8,18,68,0.6573004201680672) 0%, rgba(255,255,255,0) 100%);
 
 body {
-  background-image: url('https://storage.needpix.com/thumbs/flowering-255_1280.jpg');
-  background: linear-gradient(167deg, rgba(8,136,200,1) 0%, rgba(255,255,255,1) 100%);
+  background: $gradient-blue;
   font-family: 'Cabin';
   background-size: cover;
   height: 100vh;
@@ -15,14 +16,13 @@ body {
 }
 
 header {
-  background: -moz-linear-gradient(48deg, rgba(8,18,68,0.6573004201680672) 0%, rgba(255,255,255,0) 100%);
-  background: -webkit-linear-gradient(48deg, rgba(8,18,68,0.6573004201680672) 0%, rgba(255,255,255,0) 100%);
-  background: linear-gradient(48deg, rgba(8,18,68,0.6573004201680672) 0%, rgba(255,255,255,0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#081244",endColorstr="#ffffff",GradientType=1);
+  background: -moz-$header-gradient;
+  background: -webkit-$header-gradient;
+  background: $header-gradient;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0 ,0.7);
   color: white;
-
   display: flex;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#081244",endColorstr="#ffffff",GradientType=1);
   justify-content: center;
   
   h1 {
@@ -35,7 +35,6 @@ header {
 }
 
 .login-form {
-
   display: flex;
   flex-direction: column;
   padding-top: 10%;
@@ -53,13 +52,12 @@ header {
   }
 }
 
-
-.traveler-screen {
+.traveler-screen, .agent-screen {
   display: none;
 }
 
-.client-dashboard {
-  background: rgba(255, 255, 255, 0.94);
+.client-dashboard, .agent-dashboard {
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid white;
   border-radius: 5px;
   box-shadow: 2px 2px 5px grey;
@@ -74,8 +72,8 @@ header {
   font-size: 1.5em;
 }
 
-
-
-
-
-
+@media only screen and (max-width: 650px) {
+  .client-dashboard, .agent-dashboard {
+    width: 80vw;
+  }
+}
