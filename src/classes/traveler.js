@@ -12,6 +12,9 @@ class Traveler extends Utility {
   seeApprovedTrips() {
     return this.trips.filter(trip => trip.status === 'approved')
   }
+  seePendingTrips() {
+    return this.trips.filter(trip => trip.status === 'pending')
+  }
   seeAllTrips() {
     return this.trips;
   }
