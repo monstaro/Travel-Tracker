@@ -15,10 +15,18 @@ const loginHandler = () => {
   if (allUsernames.includes(userName.val().toLowerCase()) && password.val() === 'travel2020') {
     loginTraveler(userName)
   }
-
   if (userName.val().toLowerCase() === 'agency' && password.val() === 'travel2020') {
     loginAgent()
   } 
+  if (userName.val().toLowerCase() !== 'agency' || !allUsernames.includes(userName.val().toLowerCase()) && password.val() === 'travel2020') {
+    $('.error:eq(0)').css('visibility', 'visible')
+  }
+  if (password.val() !== 'travel2020') {
+    $('.error:eq(1)').css('visibility', 'visible')
+  }
+  if (allUsernames.includes(userName.val().toLowerCase())) {
+    $('.error:eq(0)').css('visibility', 'hidden')
+  }
 }
 
 const loginTraveler = (userName) => {

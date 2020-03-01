@@ -96,6 +96,13 @@ header {
   padding-top: 25px;
 }
 
+.error {
+  background: black;
+  color: red;
+  margin: auto;
+  visibility: hidden;
+}
+
 @media only screen and (max-width: 700px) {
   .client-dashboard, .agent-dashboard {
     width: 80vw;
