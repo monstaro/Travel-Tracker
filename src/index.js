@@ -2,6 +2,7 @@ import $ from 'jquery';
 import dataController from './dataController.js'
 import domUpdates from './domUpdates.js'
 import './css/base.scss';
+import './images/travel.svg'
 
 //LOGIN VALIDATION
 const loginHandler = () => {
@@ -54,4 +55,4 @@ $('.submit-btn').on('click', function() {
   loginHandler()
 })
 
-$('select').on('change', travelerClickHandler)
+$('.trip-selector').on('click', travelerClickHandler)
