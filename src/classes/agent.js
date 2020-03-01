@@ -17,7 +17,7 @@ class Agent extends Utility {
   }
 
   getTotalIncomeInLastYear(destinationData) {
-    let preFee = this.findApprovedRequests(this.trips).reduce((totalSpent, curTrip) => {
+    let preFee = this.findApprovedRequests().reduce((totalSpent, curTrip) => {
       destinationData.forEach(destination => {
         if (curTrip.destinationID === destination.id && this.getDatesInLastYear().includes(curTrip.date)) {
           totalSpent += (((destination.estimatedLodgingCostPerDay * curTrip.duration) + (destination.estimatedFlightCostPerPerson)) * curTrip.travelers)
@@ -26,7 +26,7 @@ class Agent extends Utility {
       return totalSpent
     }, 0)
     let fee = preFee * .10
-    return fee
+    return this.turnNumberIntoDollarAmount(fee)
   }
 
   findTravelerCountToday() {
