@@ -39,6 +39,9 @@ const domUpdates = {
     $('.traveler-balance').html(`Your current balance is ${traveler.findAmountSpent(destinations)}`)
     thisTraveler = traveler;
   },
+  bookTrip() {
+
+  },
   displayTrips(tripCategory) { 
     if (!tripCategory) {
       $('.selected-trips').empty()
