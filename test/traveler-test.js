@@ -5,7 +5,6 @@ import travelerData from '../data/sample-travelers.js';
 import tripData from '../data/sample-trips.js';
 import destinationData from '../data/sample-destinations.js';
 
-
 let traveler
 
 describe('Traveler', function() {
