@@ -2,6 +2,8 @@
 import Traveler from './classes/traveler.js'
 import Agent from './classes/agent.js'
 import domUpdates from './domUpdates.js'
+var moment = require('moment');
+
 
 //DECLARE GLOBAL VARIABLES
 let allUsers;
@@ -38,7 +40,20 @@ const dataController = {
   loadUser(id) {
     let user = allUsers[id - 1];
     let trips = allTrips.filter(trip => trip.userID === parseInt(id));
+    console.log(trips)
+
     trips.map(trip => trip.location = allDestinations.filter(destination => destination.id === trip.destinationID));
+
+    trips.map(trip => {
+      trip.date.split('-').join('/')
+      if (trip.date.split('').length === 9) {
+        trip.date = trip.date.split('')
+        trip.date.splice(5, 0, 0)
+        trip.date = trip.date.join('')
+      }
+    }
+    )
+
     traveler = new Traveler(user, trips);
     domUpdates.loadTraveler(traveler, allDestinations);
   },
