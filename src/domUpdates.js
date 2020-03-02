@@ -2,6 +2,7 @@ import $ from 'jquery';
 
 
 const datepicker = require('js-datepicker')
+import Moment from 'moment'
 // const picker = datepicker('.book-trip')
 // const start = datepicker('.depart-date', { id: 1 })
 // const end = datepicker('.return-date', { id: 2 })
@@ -13,10 +14,11 @@ let thisTraveler;
 let allDestinations;
 let idToBook; 
 let chosenLocation;
-let date = new Date()
-let thisYear = date.getFullYear()
-let thisMonth = date.getMonth()
-let thisDay = date.getUTCDate()
+// let date = new Date()
+// let thisYear = date.getFullYear()
+// let thisMonth = date.getMonth()
+// let thisDay = date.getUTCDate()
+// { minDate: new Date(thisYear, thisMonth, thisDay) }, 
 
 const domUpdates = {
   loadAgent(agent, allDestinations) {
@@ -92,7 +94,7 @@ const domUpdates = {
     Choose return date:
     <input class="return-date" placeholder="Enter Date">
     `)
-    const start = datepicker('.depart-date', { minDate: new Date(thisYear, thisMonth, thisDay) }, { id: 1 })
+    const start = datepicker('.depart-date', { id: 1 })
     const end = datepicker('.return-date', { id: 1 })
   },
   displayTrips(tripCategory) { 
