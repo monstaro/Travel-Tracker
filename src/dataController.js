@@ -40,12 +40,14 @@ const dataController = {
   loadUser(id) {
     let user = allUsers[id - 1];
     let trips = allTrips.filter(trip => trip.userID === parseInt(id));
-    console.log(trips)
 
     trips.map(trip => trip.location = allDestinations.filter(destination => destination.id === trip.destinationID));
 
     trips.map(trip => {
       trip.date.split('-').join('/')
+      if (typeof trip.destinationID === 'string') {
+        trip.destinationID = parseInt(trip.destinationID)
+      }
       if (trip.date.split('').length === 9) {
         trip.date = trip.date.split('')
         trip.date.splice(5, 0, 0)
@@ -53,7 +55,7 @@ const dataController = {
       }
     }
     )
-
+    
     traveler = new Traveler(user, trips);
     domUpdates.loadTraveler(traveler, allDestinations);
   },
