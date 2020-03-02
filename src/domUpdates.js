@@ -11,6 +11,7 @@ let chosenLocation;
 let startDate;
 let endDate;
 let travelerCount;
+let tripRequest;
 // let date = new Date()
 // let thisYear = date.getFullYear()
 // let thisMonth = date.getMonth()
@@ -129,7 +130,11 @@ const domUpdates = {
     <p>Duration: </p>
     <button class="confirm-booking"> Submit Booking Request </button>
     `)
-    $('.confirm-booking').on('click', dataController.postTrip(trip))
+    tripRequest = trip
+    $('.confirm-booking').on('click', this.submitTripRequest)
+  },
+  submitTripRequest() {
+    dataController.postTrip(tripRequest)
   },
   displayTrips(tripCategory) { 
     if (!tripCategory) {

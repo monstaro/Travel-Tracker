@@ -84,10 +84,6 @@ const dataController = {
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => console.log(error.message))
-
-    // {id: <number>, userID: <number>, destinationID: <number>, travelers: <number>, date: <string 'YYYY/MM/DD'>, duration: <number>, status: <string 'approved' or 'pending'>, suggestedActivities: <array of strings>}
-
-
   }
 }
 
