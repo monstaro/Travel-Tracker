@@ -23,6 +23,33 @@ class Utility {
   parseIdToLocation(destinations, id) {
     return destinations.filter(destination => destination.id === parseInt(id))[0]
   }
+  formatDateProperly(date) {
+    return moment(date.dateSelected).format('YYYY/MM/DD')
+  }
+  findTripLength(start, end) {
+    const oneDay = 24 * 60 * 60 * 1000; 
+    const firstDate = start.dateSelected;
+    const secondDate = end.dateSelected;
+    return Math.round(Math.abs((firstDate - secondDate) / oneDay))
+  }
+  // unifyDateFormats(trips) {
+  //   return trips.map(trip => {
+  //     trip.date.split('-').join('/')
+  //     if (typeof trip.destinationID === 'string') {
+  //       trip.destinationID = parseInt(trip.destinationID)
+  //     }
+  //     if (trip.date.split('').length === 9) {
+  //       trip.date = trip.date.split('')
+  //       trip.date.splice(5, 0, 0)
+  //       trip.date = trip.date.join('')
+  //     }
+  //   }
+  //   )
+  // }
+  // filterTripsByUser(trips) {
+  //   return trips.map(trip => trip.location = allDestinations.filter(destination => destination.id === trip.destinationID));
+  // }
+  
 }
 
 export default Utility
