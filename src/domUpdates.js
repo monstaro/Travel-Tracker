@@ -3,9 +3,9 @@ import $ from 'jquery';
 
 const datepicker = require('js-datepicker')
 import Moment from 'moment'
-const picker = datepicker('.book-trip')
-// const start = datepicker('.start', { id: 1 })
-// const end = datepicker('.end', { id: 1 })
+// const picker = datepicker('.book-trip')
+// const start = datepicker('.depart-date', { id: 1 })
+// const end = datepicker('.return-date', { id: 2 })
 
 // start.getRange()
 // end.getRange()
@@ -14,13 +14,13 @@ let thisTraveler;
 let allDestinations;
 let idToBook; 
 let chosenLocation;
+// let date = new Date()
+// let thisYear = date.getFullYear()
+// let thisMonth = date.getMonth()
+// let thisDay = date.getUTCDate()
+// { minDate: new Date(thisYear, thisMonth, thisDay) }, 
 
 const domUpdates = {
-  addDatePicker() {
-    flatpickr(".book-trip", {
-      dateFormat: "Y/m/d"
-    })
-  },
   loadAgent(agent, allDestinations) {
     $('.login-screen').css('display', 'none')
     $('.agent-screen').css('display', 'flex')
@@ -59,9 +59,7 @@ const domUpdates = {
   },
   beginBookNewTrip() {
     $('.selected-trips').empty()
-
     $('.book-trip').html('Where to?')
-
     allDestinations.forEach(destination => {
       $('.book-trip').append(`<section class="book-trip-destinations" 
       style="box-shadow: 0px 0px 5px grey;
@@ -90,7 +88,14 @@ const domUpdates = {
     this.chooseDate()
   },
   chooseDate() {
-    $('.book-trip').html(`OK, you want to go to ${chosenLocation.destination}. I hear it's lovely. When you tryna go?`)
+    $('.book-trip').html(`OK, you want to go to ${chosenLocation.destination}. I hear it's lovely. <br>
+    Choose departure date:
+    <input class="depart-date" placeholder="Enter Date"><br>
+    Choose return date:
+    <input class="return-date" placeholder="Enter Date">
+    `)
+    const start = datepicker('.depart-date', { id: 1 })
+    const end = datepicker('.return-date', { id: 1 })
   },
   displayTrips(tripCategory) { 
     if (!tripCategory) {
