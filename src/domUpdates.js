@@ -1,19 +1,16 @@
 import $ from 'jquery';
 
-
-const datepicker = require('js-datepicker')
-import Moment from 'moment'
-// const picker = datepicker('.book-trip')
-// const start = datepicker('.depart-date', { id: 1 })
-// const end = datepicker('.return-date', { id: 2 })
-
-// start.getRange()
-// end.getRange()
+const datepicker = require('js-datepicker');
+var moment = require('moment');
+import dataController from './dataController.js';
 
 let thisTraveler; 
 let allDestinations;
 let idToBook; 
 let chosenLocation;
+let startDate;
+let endDate;
+let travelerCount;
 // let date = new Date()
 // let thisYear = date.getFullYear()
 // let thisMonth = date.getMonth()
@@ -62,11 +59,11 @@ const domUpdates = {
     $('.book-trip').html('Where to?')
     allDestinations.forEach(destination => {
       $('.book-trip').append(`<section class="book-trip-destinations" 
-      style="box-shadow: 0px 0px 5px grey;
-             display: grid;
-             grid-template-columns: 1fr 1fr;
-             margin: 20px;
-             padding: 20px;">
+                                       style="box-shadow: 0px 0px 5px grey;
+                                              display: grid;
+                                              grid-template-columns: 1fr 1fr;
+                                              margin: 20px;
+                                              padding: 20px;">
       <div class="trip-image-and-name"
            style="margin: auto">
       <img src="${destination.image}" width="100%" height="auto" alt="${destination.alt}">
@@ -88,14 +85,51 @@ const domUpdates = {
     this.chooseDate()
   },
   chooseDate() {
-    $('.book-trip').html(`OK, you want to go to ${chosenLocation.destination}. I hear it's lovely. <br>
-    Choose departure date:
-    <input class="depart-date" placeholder="Enter Date"><br>
-    Choose return date:
+    $('.book-trip').html(`<h2>OK, you want to go to ${chosenLocation.destination}. I hear it's lovely. </h2>
+    <h3>Choose departure date:</h3>
+    <input class="depart-date" placeholder="Enter Date">
+    <h3>Choose return date:</h3>
     <input class="return-date" placeholder="Enter Date">
     `)
-    const start = datepicker('.depart-date', { id: 1 })
-    const end = datepicker('.return-date', { id: 1 })
+    startDate = datepicker('.depart-date', { id: 1 })
+    endDate = datepicker('.return-date', { id: 1 })
+    this.displayTravelerCountInput()
+    // ^^ try to run this method when return date gets filled?
+    // $('.return-date').on('change', this.displayTravelerCountInput())
+  },
+  displayTravelerCountInput() {
+    $('.book-trip').append(`<h2>How many people will you be traveling with? </h2>
+    <select id="traveler-count">
+      <option value="101">1</option>
+      <option value="102">2</option>
+      <option value="103">3</option>
+      <option value="104">4</option>
+      <option value="105">5</option>
+      <option value="106">6</option>
+    </select>
+    <input type="button" value="Review & Confirm" class="go-to-confirm-page"></input>
+    )
+    `)
+    $('#traveler-count').on('change', () => {
+      travelerCount = (event.target.selectedIndex + 1)
+    })
+    $('.go-to-confirm-page').on('click', this.createNewTrip)
+  },
+  createNewTrip() {
+    let duration = thisTraveler.findTripLength(startDate, endDate)
+    dataController.createNewTripInstance(thisTraveler, chosenLocation, travelerCount, thisTraveler.formatDateProperly(startDate), duration)
+  },
+  displayConfirmationPage(trip) {
+    $('.book-trip').empty()
+    $('.book-trip').html(`<h1> Confirm Your Booking </h1>
+    <h2>Does everything look correct?</h2>
+    <p>Destination: ${chosenLocation.destination}</p>
+    <p>Start Date: ${startDate.dateSelected}</p>
+    <p>End Date: ${endDate.dateSelected}</p>
+    <p>Duration: </p>
+    <button class="confirm-booking"> Submit Booking Request </button>
+    `)
+    $('.confirm-booking').on('click', dataController.postTrip(trip))
   },
   displayTrips(tripCategory) { 
     if (!tripCategory) {
