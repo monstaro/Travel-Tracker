@@ -4,7 +4,6 @@ const datepicker = require('js-datepicker');
 
 let thisTraveler; 
 let allDestinations;
-let agentDestinations;
 let idToBook; 
 let chosenLocation;
 let trips = [];
@@ -14,6 +13,7 @@ let travelerCount;
 let tripRequest;
 let pendingTrip;
 let agency;
+let searchEntry;
 
 // let thisYear = date.getFullYear()
 // let thisMonth = date.getMonth()
@@ -28,8 +28,9 @@ const domUpdates = {
     $('.welcome').html('Welcome, Travel Agent Extraordinaire.' )
     $('.agent-income').html(`You have generated ${agent.getTotalIncomeInLastYear(allDestinations)} in the last year!`)
     $('.travelers-today').html(`You have ${agent.findTravelerCountToday().length} clients on a trip today!`)
+    $('.client-search').html(`<input type ="text" class="client-search-input" id="12" placeholder="search clients">
+    </input>`)
     agent.findPendingRequests().forEach(request => {
-      console.log(request)
       trips.push(request)
       $('.pending-trips').append(`<section class='pending-trip'
                                            style="box-shadow: 0px 0px 5px grey;
@@ -55,10 +56,20 @@ const domUpdates = {
     })
     $('.approve-request').on('click', function() {
       pendingTrip = this.id;
-      agentDestinations = allDestinations
     })
     $('.deny-request').on('click', function() {
       pendingTrip = {id: parseInt(this.id)}
+    })
+    $('.client-search').on('keyup', () => {
+      searchEntry = event.target.value
+    })
+  },
+  displaySearchedUsers() {
+    $('.pending-trips').empty()
+    $('.filtered-clients').empty()
+    let filteredUsers = agency.users.filter(user => user.name.toLowerCase().includes(searchEntry.toLowerCase()))
+    filteredUsers.forEach(user => {
+      $('.filtered-clients').append(`${user.name}`)
     })
   },
   approveRequest() {

@@ -72,6 +72,12 @@ const agentClickHandler = (e) => {
   }
 }
 
+const searchForUser = (e) => {
+  if (e.target.id === "12") {
+    domUpdates.displaySearchedUsers()
+  }
+}
+
 //EVENT LISTENERS
 $('.submit-btn').on('click', function() {
   event.preventDefault()
@@ -80,3 +86,4 @@ $('.submit-btn').on('click', function() {
 
 $('.traveler-screen').on('click', travelerClickHandler)
 $('.agent-screen').on('click', agentClickHandler)
+$('.agent-screen').on('keyup', searchForUser)
