@@ -63,6 +63,15 @@ const travelerClickHandler = (e) => {
   }
 }
 
+const agentClickHandler = (e) => {
+  if (e.target.value === "10") {
+    domUpdates.approveRequest()
+  }
+  if (e.target.value === "11") {
+    domUpdates.deleteRequest()
+  }
+}
+
 //EVENT LISTENERS
 $('.submit-btn').on('click', function() {
   event.preventDefault()
@@ -70,3 +79,4 @@ $('.submit-btn').on('click', function() {
 })
 
 $('.traveler-screen').on('click', travelerClickHandler)
+$('.agent-screen').on('click', agentClickHandler)
