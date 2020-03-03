@@ -50,6 +50,21 @@ const dataController = {
       if (typeof trip.destinationID === 'string') {
         trip.destinationID = parseInt(trip.destinationID)
       }
+      if (!trip.destinationID) {
+        trip.destinationID = 8
+      }
+      if (typeof trip.userID === 'string') {
+        trip.userID = parseInt(trip.userID)
+      }
+      if (typeof trip.travelers === 'string') {
+        trip.travlers = parseInt(trip.travelers)
+      }
+      if (typeof trip.duration === 'string') {
+        trip.duration = parseInt(trip.duration)
+      }
+      if (typeof trip.id === 'string') {
+        trip.id = Date.now()
+      }
       if (trip.date.split('').length === 9) {
         trip.date = trip.date.split('')
         trip.date.splice(5, 0, 0)
@@ -62,7 +77,36 @@ const dataController = {
   },
   loadAgent() {
     allTrips.map(trip => trip.location = allDestinations.filter(destination => destination.id === trip.destinationID));
-    //may end up wanting to instantiate the users with their trips / mapping over the allUsers array to add the trips before I push allUsers into the agent.
+
+    allTrips.map(trip => {
+      trip.date.split('-').join('/')
+      // ^^ put in conditional?
+
+      if (typeof trip.destinationID === 'string') {
+        trip.destinationID = parseInt(trip.destinationID)
+      }
+      if (!trip.destinationID) {
+        trip.destinationID = 8
+      }
+      if (typeof trip.userID === 'string') {
+        trip.userID = parseInt(trip.userID)
+      }
+      if (typeof trip.travelers === 'string') {
+        trip.travlers = parseInt(trip.travelers)
+      }
+      if (typeof trip.duration === 'string') {
+        trip.duration = parseInt(trip.duration)
+      }
+      if (typeof trip.id === 'string') {
+        trip.id = Date.now()
+      }
+      if (trip.date.split('').length === 9) {
+        trip.date = trip.date.split('')
+        trip.date.splice(5, 0, 0)
+        trip.date = trip.date.join('')
+      }
+    })
+
     agent = new Agent(allTrips, allUsers);
     domUpdates.loadAgent(agent, allDestinations);
   },
@@ -73,6 +117,30 @@ const dataController = {
   postTrip(trip) {
     fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(trip),
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error.message))
+  },
+  approveRequest(trip) {
+    fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/updateTrip', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(trip),
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error.message))
+  },
+  deleteRequest(trip) {
+    fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/trips/trips', {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       },

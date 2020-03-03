@@ -1,18 +1,20 @@
 import $ from 'jquery';
-
-const datepicker = require('js-datepicker');
-var moment = require('moment');
 import dataController from './dataController.js';
+const datepicker = require('js-datepicker');
 
 let thisTraveler; 
 let allDestinations;
+let agentDestinations;
 let idToBook; 
 let chosenLocation;
+let trips = [];
 let startDate;
 let endDate;
 let travelerCount;
 let tripRequest;
-// let date = new Date()
+let pendingTrip;
+let agency;
+
 // let thisYear = date.getFullYear()
 // let thisMonth = date.getMonth()
 // let thisDay = date.getUTCDate()
@@ -20,12 +22,15 @@ let tripRequest;
 
 const domUpdates = {
   loadAgent(agent, allDestinations) {
+    agency = agent;
     $('.login-screen').css('display', 'none')
     $('.agent-screen').css('display', 'flex')
     $('.welcome').html('Welcome, Travel Agent Extraordinaire.' )
     $('.agent-income').html(`You have generated ${agent.getTotalIncomeInLastYear(allDestinations)} in the last year!`)
     $('.travelers-today').html(`You have ${agent.findTravelerCountToday().length} clients on a trip today!`)
     agent.findPendingRequests().forEach(request => {
+      console.log(request)
+      trips.push(request)
       $('.pending-trips').append(`<section class='pending-trip'
                                            style="box-shadow: 0px 0px 5px grey;
                                            display: grid;
@@ -43,9 +48,27 @@ const domUpdates = {
       <h3>Trip duration: ${request.duration} days. </h3>
       <h3>Traveler count: ${request.travelers} </h3>
       <h3>Status: ${request.status}
+      <button class="approve-request" value="10" id=${request.id}>Approve</button>
+      <button class="deny-request" value="11" id=${request.id}>Deny</button>
       </div>
       </section>`)
     })
+    $('.approve-request').on('click', function() {
+      pendingTrip = this.id;
+      agentDestinations = allDestinations
+    })
+    $('.deny-request').on('click', function() {
+      pendingTrip = {id: parseInt(this.id)}
+    })
+  },
+  approveRequest() {
+    pendingTrip = agency.parseIdToLocation(trips, pendingTrip);
+    let reducedTrip = {id: pendingTrip.id, status: 'approved'};
+    dataController.approveRequest(reducedTrip);
+  },
+  deleteRequest() {
+    console.log(pendingTrip)
+    dataController.deleteRequest(pendingTrip)
   },
   loadTraveler(traveler, destinations) {
     $('.login-screen').css('display', 'none')
