@@ -29,8 +29,10 @@ const loginHandler = () => {
   }
 }
 
+let id
+
 const loginTraveler = (userName) => {
-  let id = userName.val().substring(8, 10)
+  id = userName.val().substring(8, 10)
   dataController.loadUser(id)
 }
 
@@ -63,6 +65,24 @@ const travelerClickHandler = (e) => {
   }
 }
 
+const agentClickHandler = (e) => {
+  if (e.target.value === "10") {
+    domUpdates.approveRequest()
+  }
+  if (e.target.value === "11") {
+    domUpdates.deleteRequest()
+  }
+  if (e.target.id === "13") {
+    dataController.loadAgent()
+  }
+}
+
+const searchForUser = (e) => {
+  if (e.target.id === "12") {
+    domUpdates.displaySearchedUsers()
+  }
+}
+
 //EVENT LISTENERS
 $('.submit-btn').on('click', function() {
   event.preventDefault()
@@ -70,3 +90,5 @@ $('.submit-btn').on('click', function() {
 })
 
 $('.traveler-screen').on('click', travelerClickHandler)
+$('.agent-screen').on('click', agentClickHandler)
+$('.agent-screen').on('keyup', searchForUser)

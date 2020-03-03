@@ -32,7 +32,9 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "flatpickr": "^4.6.3",
     "jquery": "^3.4.1",
+    "js-datepicker": "^5.4.0",
     "moment": "^2.24.0",
     "tailwind": "^4.0.0",
     "tailwindcss": "^1.2.0"
