@@ -3,8 +3,6 @@ import Traveler from './classes/traveler.js'
 import Agent from './classes/agent.js'
 import domUpdates from './domUpdates.js'
 import Trip from './classes/trip.js'
-var moment = require('moment');
-
 
 //DECLARE GLOBAL VARIABLES
 let allUsers;
@@ -46,7 +44,6 @@ const dataController = {
     trips.map(trip => trip.location = allDestinations.filter(destination => destination.id === trip.destinationID));
 
     trips.map(trip => {
-
       trip.date.split('-').join('/')
       // ^^ put in conditional?
 
