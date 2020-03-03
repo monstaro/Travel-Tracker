@@ -1,105 +1,38 @@
-# Webpack Starter Kit
+# TravelPOP!
+## Your virtual travel agent
 
-## Clone This Repo
+### About
+This was a project undertaken to work on good OOP Practices. It was written in about one week by just myself, and utilised many new (to me) technologies such as using Mocha/Chai Spies Testing, jQuery, working with Fetch API, as well as using class inheritance. I made an effort to keep my code as DRY as possible within my allotted timeframe, as well keep the SRP (single responsibility principle) strong. 
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+### Tech Used
+This project was built using HTML5/ES6 syntax, SCSS, jQuery, and was tested using the Mocha framework and Chai assertion library. 
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+[moment.js](https://github.com/moment/moment)
+[js-datepicker](https://github.com/moment/moment)
 
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+### How to Use
+In your terminal, clone down `https://github.com/monstaro/Travel-Tracker.git` and run `npm install` 
+Webpack is bundled in this repo, so in order to interact with the page, run `npm start`, or `npm run start`. After you start up the local server, by default the page will be viewable at `localhost:8000` in your browser, but may be on a different port depending on your configurations. 
 
-## Setup
+You can also access the deployed webpage at [github pages](https://monstaro.github.io/Travel-Tracker/).
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
+There are 50 users on the server, each with an id of 1-50. A user can log in as a traveler with the username `traveler<1-50>` and password `travel2020`. Similarly, the travel agent can log in using `agency` and the same password.
 
-Then install the library dependencies. Run:
+From there, a client can view a list of trips (pending, approved, past, all) and book a new trip based off of a list of destinations. When the user inputs the dates, traveler count, and destination, they see a confirmation page and are able to submit that trip request for a server.
 
-```bash
-npm install
-```
+An agent can then log in, and see that trip at the bottom of their pending requests page. The agent can either approve or deny it, which will once again update the status of that trip in the server. 
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text and a pink background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+### Screenshots
 
-## Where to Add Your Code
+<img width="400" alt="login screen" src="https://user-images.githubusercontent.com/32964891/75829277-01204f80-5d6b-11ea-9153-3e65cc6dc799.png">
+<img width="400" alt="booking trip 1" src="https://user-images.githubusercontent.com/32964891/75829278-01b8e600-5d6b-11ea-8646-d59912ce5436.png">
+<img width="400" alt="booking trip 2" src="https://user-images.githubusercontent.com/32964891/75829280-01b8e600-5d6b-11ea-856b-d30c9a9d67fe.png">
+<img width="400" alt="agency view" src="https://user-images.githubusercontent.com/32964891/75829281-02517c80-5d6b-11ea-8a17-5ab1d0d96d4c.png">
 
-### JavaScript
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
-
-**Create all of your feature code files in the `src` directory.**
-
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
-
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
-
-### HTML
-
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
-
-### CSS (SCSS/SASS)
-
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
-
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
-
-### Images
-
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
-
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
-
----
-
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
-
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+### Future Iterations
+- I would like to break out my `domUpdates` file into more modular parts in the future. 
+- On the traveler view, a client cannot request a return date before their departure date, but the departure date still allows a date before today to be chosen. When I tried to set up a min-date on the departure date, it removed the min-date functionality for the departure date. 
+- When a user trips 'book trip' again after booking one trip, the date picker doesn't work. 
+- User search function for agent. Currently the agent can search through a list of users by name, but no information shows about them. I would like for users to show up and have the agent able to approve/deny trip requests and see the income generated from that user. 
+- I would like to try more secure ways of working with login forms. Currently, the usernames and passwords are static. 
