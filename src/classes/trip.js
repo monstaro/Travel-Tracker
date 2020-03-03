@@ -6,7 +6,6 @@ class Trip {
     this.travelers = travelerCount,
     this.date = startDate,
     this.duration = duration,
-    // this.endDate = endDate,
     this.status = 'pending',
     this.suggestedActivities = []
   }
@@ -14,6 +13,5 @@ class Trip {
 
   }
 }
-
 
 export default Trip
