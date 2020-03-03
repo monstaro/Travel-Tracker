@@ -7,7 +7,7 @@
   <body>
     <section class="home-screen">
     <header>
-      <img src="images/travel.svg" class="logo">
+      <img src="images/travel.svg" alt="travelpop logo" class="logo">
       <h1>travelpop</h1>
       <h3 class="tagline">...plan your perfect getaway</h3>
     </header>
@@ -15,11 +15,11 @@
     <form class="login-form">
       <h3>please log in</h3>
       <label for="enter username">
-        <input type="text" class="username-input" placeholder="enter username">
+        <input type="text" label= "enter username" class="username-input" placeholder="enter username">
       </label>  
       <p class="error">Please enter a valid username.</p>
      <label for="enter password">
-      <input type="password" class="password-input" placeholder="enter password">
+      <input type="password"  label="enter password" class="password-input" placeholder="enter password">
      </label>
      <p class="error">Please enter a valid password.</p>
      <label for="submit">
@@ -32,11 +32,21 @@
       <section class="welcome"></section>
         <section class="traveler-balance"></section>
         <div class="trip-selector">
-          <button value="1">All Trips</button>
-          <button value="2">Upcoming Trips</button>
-          <button value="3">Past Trips</button>
-          <button value="4">Pending Trips</button>
-          <button value="5">Book New Trip</button>
+          <label for = "all trips">
+            <button value="1">All Trips</button>
+          </label>
+          <label for="upcoming trips">
+            <button value="2">Upcoming Trips</button>
+          </label>
+          <label for="past trips">
+            <button value="3">Past Trips</button>
+          </label>
+          <label for="pending trips">
+            <button value="4">Pending Trips</button>
+          </label>
+          <label for="book new trip">
+            <button value="5">Book New Trip</button>
+          </label>
         </div>
         <section class="book-trip">
         </section>
