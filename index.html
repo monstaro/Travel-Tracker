@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Cabin&display=swap" rel="stylesheet">
+    <title>Travelpop!</title>
+  </head>
+  <body>
+    <section class="home-screen">
+    <header>
+      <img src="images/travel.svg" class="logo">
+      <h1>travelpop</h1>
+      <h3 class="tagline">...plan your perfect getaway</h3>
+    </header>
+    <section class="login-screen">
+    <form class="login-form">
+      <h3>please log in</h3>
+      <label for="enter username">
+        <input type="text" class="username-input" placeholder="enter username">
+      </label>  
+      <p class="error">Please enter a valid username.</p>
+     <label for="enter password">
+      <input type="password" class="password-input" placeholder="enter password">
+     </label>
+     <p class="error">Please enter a valid password.</p>
+     <label for="submit">
+      <input type="submit" class="submit-btn" value="login">
+     </label>
+    </form>
+    </section>
+    <section class="traveler-screen">
+      <section class="client-dashboard">
+      <section class="welcome"></section>
+        <section class="traveler-balance"></section>
+        <div class="trip-selector">
+          <button value="1">All Trips</button>
+          <button value="2">Upcoming Trips</button>
+          <button value="3">Past Trips</button>
+          <button value="4">Pending Trips</button>
+          <button value="5">Book New Trip</button>
+        </div>
+        <section class="book-trip">
+        </section>
+        <section class="selected-trips">
+        </section>
+      </section> 
+    </section>
+    <section class="agent-screen">
+      <section class="client-dashboard">
+        <section class="welcome"></section>
+          <section class="agent-income"></section>
+          <section class="view-pending"></section>
+          <section class="client-search"></section>
+          <section class="filtered-clients"></section>
+          <section class="travelers-today">
+          </section>
+          <section class="pending-trips">
+            <h2>Pending Trips</h2>
+          </section>
+        </section> 
+    </section>
+  </section>
+  <script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
