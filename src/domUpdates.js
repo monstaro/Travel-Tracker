@@ -14,6 +14,7 @@ let tripRequest;
 let pendingTrip;
 let agency;
 let searchEntry;
+let userId;
 
 // let thisYear = date.getFullYear()
 // let thisMonth = date.getMonth()
@@ -23,10 +24,11 @@ let searchEntry;
 const domUpdates = {
   loadAgent(agent, allDestinations) {
     agency = agent;
+    console.log(agent)
     $('.login-screen').css('display', 'none')
     $('.agent-screen').css('display', 'flex')
     $('.welcome').html('Welcome, Travel Agent Extraordinaire.' )
-    $('.agent-income').html(`You have generated ${agent.getTotalIncomeInLastYear(allDestinations)} in the last year!`)
+    $('.agent-income').html(`You have generated ${agent.getTotalIncomeInLastYear(allDestinations)} in the last year! <button id="13">View Pending Trips</button>`)
     $('.travelers-today').html(`You have ${agent.findTravelerCountToday().length} clients on a trip today!`)
     $('.client-search').html(`<input type ="text" class="client-search-input" id="12" placeholder="search clients">
     </input>`)
@@ -143,7 +145,6 @@ const domUpdates = {
       <option value="106">6</option>
     </select>
     <input type="button" value="Review & Confirm" class="go-to-confirm-page"></input>
-    )
     `)
     $('#traveler-count').on('change', () => {
       travelerCount = (event.target.selectedIndex + 1)
@@ -159,16 +160,25 @@ const domUpdates = {
     $('.book-trip').html(`<h1> Confirm Your Booking </h1>
     <h2>Does everything look correct?</h2>
     <p>Destination: ${chosenLocation.destination}</p>
-    <p>Start Date: ${startDate.dateSelected}</p>
-    <p>End Date: ${endDate.dateSelected}</p>
-    <p>Duration: </p>
+    <p>Start Date: ${thisTraveler.formatDateProperly(startDate)}</p>
+    <p>End Date: ${thisTraveler.formatDateProperly(endDate)}</p>
+    <p>Duration: ${thisTraveler.findTripLength(startDate, endDate)} Days</p>
     <button class="confirm-booking"> Submit Booking Request </button>
     `)
+    userId = thisTraveler.id
     tripRequest = trip
     $('.confirm-booking').on('click', this.submitTripRequest)
   },
   submitTripRequest() {
+    $('.book-trip').html(`Ayyye lmao pack ya bags, you goin 2 ${chosenLocation.destination.split(',')[0]}`)
+
+
     dataController.postTrip(tripRequest)
+
+
+    thisTraveler.trips.push(tripRequest)
+    thisTraveler.trips[thisTraveler.trips.length - 1].location = [chosenLocation]
+    // ^^ kind of hacky way to have the newly booked trip display w/o havig to log back out and in.
   },
   displayTrips(tripCategory) { 
     if (!tripCategory) {

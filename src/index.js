@@ -29,8 +29,10 @@ const loginHandler = () => {
   }
 }
 
+let id
+
 const loginTraveler = (userName) => {
-  let id = userName.val().substring(8, 10)
+  id = userName.val().substring(8, 10)
   dataController.loadUser(id)
 }
 
@@ -69,6 +71,9 @@ const agentClickHandler = (e) => {
   }
   if (e.target.value === "11") {
     domUpdates.deleteRequest()
+  }
+  if (e.target.id === "13") {
+    dataController.loadAgent()
   }
 }
 
