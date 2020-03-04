@@ -48,6 +48,12 @@ class Utility {
     const secondDate = end.dateSelected;
     return Math.round(Math.abs((firstDate - secondDate) / oneDay))
   }
+  findCostOfTrip(destination, trip) {
+    console.log(destination, trip)
+    let preFee = (((destination.estimatedFlightCostPerPerson + destination.estimatedLodgingCostPerDay) * trip.duration)  * trip.travelers)
+    let fee = preFee * .10
+    return fee + preFee;
+  }
 }
 
 export default Utility

@@ -193,6 +193,7 @@ const domUpdates = {
     <p>Start Date: ${thisTraveler.formatDateProperly(startDate)}</p>
     <p>End Date: ${thisTraveler.formatDateProperly(endDate)}</p>
     <p>Duration: ${thisTraveler.findTripLength(startDate, endDate)} Days</p>
+    <p>Cost: $ ${thisTraveler.findCostOfTrip(chosenLocation, trip)}
     <button class="confirm-booking"> Submit Booking Request </button>
     `)
     tripRequest = trip
