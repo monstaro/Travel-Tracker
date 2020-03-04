@@ -3,6 +3,21 @@ var moment = require('moment');
 class Utility {
   constructor() {
   }
+  seeApprovedTrips() {
+    return this.trips.filter(trip => trip.status === 'approved')
+  }
+  seePendingTrips() {
+    return this.trips.filter(trip => trip.status === 'pending')
+  }
+  seeAllTrips() {
+    return this.trips;
+  }
+  seePastTrips() {
+    return this.trips.filter(trip => trip.date < this.getTodaysDate())
+  }
+  seeFutureTrips() {
+    return this.trips.filter(trip => trip.date > this.getTodaysDate())
+  }
   getTodaysDate() {
     return moment().format().substring(0, 10).split('-').join('/')
   }
