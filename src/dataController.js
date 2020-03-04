@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import Traveler from './classes/traveler.js'
 import Agent from './classes/agent.js'
+
 import domUpdates from './domUpdates.js'
 import Trip from './classes/trip.js'
 
@@ -11,6 +12,7 @@ let allDestinations;
 let traveler;
 let agent;
 let trip;
+
 
 //FETCH USER DATA
 const userData = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/travelers/travelers')
@@ -43,69 +45,70 @@ const dataController = {
 
     trips.map(trip => trip.location = allDestinations.filter(destination => destination.id === trip.destinationID));
 
-    trips.map(trip => {
-      trip.date.split('-').join('/')
-      // ^^ put in conditional?
+    // trips.map(trip => {
+    //   trip.date.split('-').join('/')
+    //   // ^^ put in conditional?
 
-      if (typeof trip.destinationID === 'string') {
-        trip.destinationID = parseInt(trip.destinationID)
-      }
-      if (!trip.destinationID) {
-        trip.destinationID = 8
-      }
-      if (typeof trip.userID === 'string') {
-        trip.userID = parseInt(trip.userID)
-      }
-      if (typeof trip.travelers === 'string') {
-        trip.travlers = parseInt(trip.travelers)
-      }
-      if (typeof trip.duration === 'string') {
-        trip.duration = parseInt(trip.duration)
-      }
-      if (typeof trip.id === 'string') {
-        trip.id = Date.now()
-      }
-      if (trip.date.split('').length === 9) {
-        trip.date = trip.date.split('')
-        trip.date.splice(5, 0, 0)
-        trip.date = trip.date.join('')
-      }
-    }
-    )
+    //   if (typeof trip.destinationID === 'string') {
+    //     trip.destinationID = parseInt(trip.destinationID)
+    //   }
+    //   if (!trip.destinationID) {
+    //     trip.destinationID = 8
+    //   }
+    //   if (typeof trip.userID === 'string') {
+    //     trip.userID = parseInt(trip.userID)
+    //   }
+    //   if (typeof trip.travelers === 'string') {
+    //     trip.travlers = parseInt(trip.travelers)
+    //   }
+    //   if (typeof trip.duration === 'string') {
+    //     trip.duration = parseInt(trip.duration)
+    //   }
+    //   if (typeof trip.id === 'string') {
+    //     trip.id = Date.now()
+    //   }
+    //   if (trip.date.split('').length === 9) {
+    //     trip.date = trip.date.split('')
+    //     trip.date.splice(5, 0, 0)
+    //     trip.date = trip.date.join('')
+    //   }
+    // })
+
     traveler = new Traveler(user, trips);
     domUpdates.loadTraveler(traveler, allDestinations);
   },
   loadAgent() {
     allTrips.map(trip => trip.location = allDestinations.filter(destination => destination.id === trip.destinationID));
 
-    allTrips.map(trip => {
-      trip.date.split('-').join('/')
-      // ^^ put in conditional?
+    // allTrips.map(trip => {
+    //   trip.date.split('-').join('/')
+    //   // ^^ put in conditional?
 
-      if (typeof trip.destinationID === 'string') {
-        trip.destinationID = parseInt(trip.destinationID)
-      }
-      if (!trip.destinationID) {
-        trip.destinationID = 8
-      }
-      if (typeof trip.userID === 'string') {
-        trip.userID = parseInt(trip.userID)
-      }
-      if (typeof trip.travelers === 'string') {
-        trip.travlers = parseInt(trip.travelers)
-      }
-      if (typeof trip.duration === 'string') {
-        trip.duration = parseInt(trip.duration)
-      }
-      if (typeof trip.id === 'string') {
-        trip.id = Date.now()
-      }
-      if (trip.date.split('').length === 9) {
-        trip.date = trip.date.split('')
-        trip.date.splice(5, 0, 0)
-        trip.date = trip.date.join('')
-      }
-    })
+    //   if (typeof trip.destinationID === 'string') {
+    //     trip.destinationID = parseInt(trip.destinationID)
+    //   }
+    //   if (!trip.destinationID) {
+    //     trip.destinationID = 8
+    //   }
+    //   if (typeof trip.userID === 'string') {
+    //     trip.userID = parseInt(trip.userID)
+    //   }
+    //   if (typeof trip.travelers === 'string') {
+    //     trip.travlers = parseInt(trip.travelers)
+    //   }
+    //   if (typeof trip.duration === 'string') {
+    //     trip.duration = parseInt(trip.duration)
+    //   }
+    //   if (typeof trip.id === 'string') {
+    //     trip.id = Date.now()
+    //   }
+    //   if (trip.date.split('').length === 9) {
+    //     trip.date = trip.date.split('')
+    //     trip.date.splice(5, 0, 0)
+    //     trip.date = trip.date.join('')
+    //   }
+    // })
+    allUsers.map(user => user.trips = allTrips.filter(trip => trip.userID === user.id))
 
     agent = new Agent(allTrips, allUsers);
     domUpdates.loadAgent(agent, allDestinations);

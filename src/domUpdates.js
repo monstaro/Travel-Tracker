@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import dataController from './dataController.js';
 const datepicker = require('js-datepicker');
+import Traveler from './classes/traveler.js'
+
 
 let thisTraveler; 
 let allDestinations;
@@ -13,24 +15,18 @@ let travelerCount;
 let tripRequest;
 let pendingTrip;
 let agency;
-let searchEntry;
-let userId;
-
-// let thisYear = date.getFullYear()
-// let thisMonth = date.getMonth()
-// let thisDay = date.getUTCDate()
-// { minDate: new Date(thisYear, thisMonth, thisDay) }, 
+let searchEntry; 
 
 const domUpdates = {
   loadAgent(agent, allDestinations) {
     agency = agent;
-    console.log(agent)
     $('.login-screen').css('display', 'none')
     $('.agent-screen').css('display', 'flex')
     $('.welcome').html('Welcome, Travel Agent Extraordinaire.' )
-    $('.agent-income').html(`You have generated ${agent.getTotalIncomeInLastYear(allDestinations)} in the last year! <button id="13">View Pending Trips</button>`)
+    $('.agent-income').html(`You have generated ${agent.getTotalIncomeInLastYear(allDestinations)} in the last year!`)
     $('.travelers-today').html(`You have ${agent.findTravelerCountToday().length} clients on a trip today!`)
-    $('.client-search').html(`<input type ="text" class="client-search-input" id="12" placeholder="search clients">
+    $('.client-search').html(`<input type ="text" class="client-search-input" placeholder="search clients">
+                              <button  id="12"> Search Pending </button>
     </input>`)
     agent.findPendingRequests().forEach(request => {
       trips.push(request)
@@ -67,20 +63,54 @@ const domUpdates = {
     })
   },
   displaySearchedUsers() {
-    $('.pending-trips').empty()
-    $('.filtered-clients').empty()
-    let filteredUsers = agency.users.filter(user => user.name.toLowerCase().includes(searchEntry.toLowerCase()))
-    filteredUsers.forEach(user => {
-      $('.filtered-clients').append(`${user.name}`)
-    })
+    $('.pending-trips').empty();
+    $('.filtered-clients').empty();
+    let filteredUser = agency.users.filter(user => user.name.toLowerCase().includes(searchEntry.toLowerCase()));
+    let searchedTravelerTrips = agency.trips.filter(trip => trip.userID === filteredUser[0].id)
+    thisTraveler = new Traveler(filteredUser[0], searchedTravelerTrips)
+    let pending = thisTraveler.seePendingTrips()
+    if (pending.length === 0) {
+      $('.filtered-clients').append(`<section class='users-trips'>${thisTraveler.name.split(' ')[0]} has no pending trips currently.</section>`)
+    } else {
+      pending.forEach(trip => {
+        $('.filtered-clients').append(`
+      <section class='users-trips'
+                                           style="box-shadow: 0px 0px 5px grey;
+                                           display: grid;
+                                           grid-template-columns: 1fr 1fr;
+                                           margin: 20px;
+                                           padding: 20px;">
+      <div class="trip-image-and-name"
+           style="margin: auto">
+      <img src="${trip.location[0].image}" width="100%" height="auto" alt="${trip.location[0].alt}">
+      <h2>${trip.location[0].destination}</h2>
+      </div>
+      <div class="trip-summary">
+      <h3> Trip to ${trip.location[0].destination.split(',')[0]}.</h3>
+      <h3>Start date: ${trip.date}</h3>
+      <h3>Trip duration: ${trip.duration} days. </h3>
+      <h3>Traveler count: ${trip.travelers} </h3>
+      <h3>Status: ${trip.status} </h3>
+      <section class="approvedenybuttons">
+      <button class="approve-request" value="10" id=${trip.id}>Approve</button>
+      <button class="deny-request" value="11" id=${trip.id}>Deny</button>
+      </section>
+      </div>
+      </section>`)
+      })
+    }
+    $('.approve-request').on('click', () => pendingTrip = event.target.id)
   },
   approveRequest() {
+    $('.pending-trips').html('This trip has been approved.')
+
     pendingTrip = agency.parseIdToLocation(trips, pendingTrip);
     let reducedTrip = {id: pendingTrip.id, status: 'approved'};
     dataController.approveRequest(reducedTrip);
   },
   deleteRequest() {
-    console.log(pendingTrip)
+  
+    $('.pending-trips').html('This trip has been denied.')
     dataController.deleteRequest(pendingTrip)
   },
   loadTraveler(traveler, destinations) {
@@ -165,7 +195,6 @@ const domUpdates = {
     <p>Duration: ${thisTraveler.findTripLength(startDate, endDate)} Days</p>
     <button class="confirm-booking"> Submit Booking Request </button>
     `)
-    userId = thisTraveler.id
     tripRequest = trip
     $('.confirm-booking').on('click', this.submitTripRequest)
   },

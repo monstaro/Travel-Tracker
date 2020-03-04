@@ -66,6 +66,7 @@ const travelerClickHandler = (e) => {
 }
 
 const agentClickHandler = (e) => {
+
   if (e.target.value === "10") {
     domUpdates.approveRequest()
   }
@@ -75,13 +76,16 @@ const agentClickHandler = (e) => {
   if (e.target.id === "13") {
     dataController.loadAgent()
   }
-}
-
-const searchForUser = (e) => {
   if (e.target.id === "12") {
     domUpdates.displaySearchedUsers()
   }
 }
+
+// const searchForUser = (e) => {
+//   if (e.target.id === "12") {
+//     domUpdates.displaySearchedUsers()
+//   }
+// }
 
 //EVENT LISTENERS
 $('.submit-btn').on('click', function() {
@@ -91,4 +95,4 @@ $('.submit-btn').on('click', function() {
 
 $('.traveler-screen').on('click', travelerClickHandler)
 $('.agent-screen').on('click', agentClickHandler)
-$('.agent-screen').on('keyup', searchForUser)
+// $('.agent-screen').on('keyup', searchForUser)
