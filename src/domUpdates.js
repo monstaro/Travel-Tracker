@@ -71,8 +71,11 @@ const domUpdates = {
     thisTraveler = new Traveler(filteredUser[0], searchedTravelerTrips)
     console.log(thisTraveler)
     let pending = thisTraveler.seePendingTrips()
-    pending.forEach(trip => {
-      $('.filtered-clients').append(`
+    if (pending.length === 0) {
+      $('.filtered-clients').append(`<section class='users-trips'>${thisTraveler.name.split(' ')[0]} has no pending trips currently.</section>`)
+    } else {
+      pending.forEach(trip => {
+        $('.filtered-clients').append(`
       <section class='users-trips'
                                            style="box-shadow: 0px 0px 5px grey;
                                            display: grid;
@@ -95,7 +98,8 @@ const domUpdates = {
       <button class="deny-request" value="11" id=${trip.id}>Deny</button>
       </div>
       </section>`)
-    })
+      })
+    }
     $('.approve-request').on('click', () => pendingTrip = event.target.id)
   },
   approveRequest() {
