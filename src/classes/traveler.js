@@ -9,21 +9,6 @@ class Traveler extends Utility {
     this.travelerType = info.travelerType,
     this.trips = trips
   }
-  seeApprovedTrips() {
-    return this.trips.filter(trip => trip.status === 'approved')
-  }
-  seePendingTrips() {
-    return this.trips.filter(trip => trip.status === 'pending')
-  }
-  seeAllTrips() {
-    return this.trips;
-  }
-  seePastTrips() {
-    return this.trips.filter(trip => trip.date < this.getTodaysDate())
-  }
-  seeFutureTrips() {
-    return this.trips.filter(trip => trip.date > this.getTodaysDate())
-  }
   findAmountSpent(destinationData) {
     let preFee = this.seeApprovedTrips().reduce((totalSpent, curTrip) => {
       destinationData.forEach(destination => {
