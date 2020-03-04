@@ -91,9 +91,10 @@ const domUpdates = {
       <h3>Trip duration: ${trip.duration} days. </h3>
       <h3>Traveler count: ${trip.travelers} </h3>
       <h3>Status: ${trip.status} </h3>
-      <section class="approvedenybuttons"></section>
+      <section class="approvedenybuttons">
       <button class="approve-request" value="10" id=${trip.id}>Approve</button>
       <button class="deny-request" value="11" id=${trip.id}>Deny</button>
+      </section>
       </div>
       </section>`)
       })
@@ -101,11 +102,15 @@ const domUpdates = {
     $('.approve-request').on('click', () => pendingTrip = event.target.id)
   },
   approveRequest() {
+    $('.pending-trips').html('This trip has been approved.')
+
     pendingTrip = agency.parseIdToLocation(trips, pendingTrip);
     let reducedTrip = {id: pendingTrip.id, status: 'approved'};
     dataController.approveRequest(reducedTrip);
   },
   deleteRequest() {
+  
+    $('.pending-trips').html('This trip has been denied.')
     dataController.deleteRequest(pendingTrip)
   },
   loadTraveler(traveler, destinations) {
