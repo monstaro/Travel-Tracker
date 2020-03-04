@@ -20,7 +20,6 @@ let searchEntry;
 const domUpdates = {
   loadAgent(agent, allDestinations) {
     agency = agent;
-    console.log(agent)
     $('.login-screen').css('display', 'none')
     $('.agent-screen').css('display', 'flex')
     $('.welcome').html('Welcome, Travel Agent Extraordinaire.' )
@@ -69,7 +68,6 @@ const domUpdates = {
     let filteredUser = agency.users.filter(user => user.name.toLowerCase().includes(searchEntry.toLowerCase()));
     let searchedTravelerTrips = agency.trips.filter(trip => trip.userID === filteredUser[0].id)
     thisTraveler = new Traveler(filteredUser[0], searchedTravelerTrips)
-    console.log(thisTraveler)
     let pending = thisTraveler.seePendingTrips()
     if (pending.length === 0) {
       $('.filtered-clients').append(`<section class='users-trips'>${thisTraveler.name.split(' ')[0]} has no pending trips currently.</section>`)
@@ -104,12 +102,10 @@ const domUpdates = {
   },
   approveRequest() {
     pendingTrip = agency.parseIdToLocation(trips, pendingTrip);
-    console.log(pendingTrip, trips)
     let reducedTrip = {id: pendingTrip.id, status: 'approved'};
     dataController.approveRequest(reducedTrip);
   },
   deleteRequest() {
-    console.log(pendingTrip)
     dataController.deleteRequest(pendingTrip)
   },
   loadTraveler(traveler, destinations) {
